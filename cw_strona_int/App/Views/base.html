@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl">
+	<head>
+		<meta charset="utf-8"/>
+		<title>O$zczedzaj pieniądze</title>
+				<meta charset="utf-8"/>
+		<title>O$zczedzaj pieniądze</title>
+		<meta name="description" content="Strona przeznaczona do oszczedzania pieniedzy"/>
+		<meta name="keywords" content="bilans, przychod,wydatek "/>	
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 	
+		<link rel="stylesheet" href="/main.css" type="text/css" />
+		<link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">	
+		<link rel="stylesheet" href="/css/fontello.css"/>		
+		<link rel="stylesheet" href="/css/bootstrap.css"/>		
+	</head>	
+		<body>
+				<div id="container" class="col-12">
+					<div id="title" class="col-12" >
+		<img  id="dollar" src="/img/dolar.png" alt="dolar"/>O$zczedzaj pieniądze
+		<div class="quote">
+			Żyje się za pieniądze, ale nie warto żyć dla pieniędzy. Wszystko, co można dostać za pieniądze, jest tanie.</div>
+		</div>
+							<div id="menu">  
+				<div id="menuoption">  
+					<ul>
+						<li>
+							<a 	href="/registration/new">
+							Rejestracja
+							</a>
+						</li>
+						<li>
+							<a href="/">
+							Logowanie
+							</a>
+						</li>
+					</ul>
+					<div style="clear:both;"></div>
+				</div>
+			</div>
+		    {% block body %}
+    {% endblock %}
+		</div>
+			
+		<script src="/js/bootstrap.js"></script>
+		    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+			    {% block footer %}
+    {% endblock %}
+		</body>
+</html>	

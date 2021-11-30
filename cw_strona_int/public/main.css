@@ -1,0 +1,492 @@
+body
+{
+
+	background-image: url("img/z2.jpg");
+	
+
+	font-family: 'Roboto', sans-serif;
+	
+}
+#title
+{
+	background-image:linear-gradient(#c6c6c6,#a2a2a2);
+
+font-size: 70px;	
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	color:white;
+	padding:20px;
+	letter-spacing:2px;
+font-family: 'Style Script', cursive;
+text-align:center;
+
+	
+}
+#dollar
+{
+	
+	
+	height:30px;
+	
+}
+#container
+
+{
+
+	text-align:center;
+	
+}
+#menu
+{
+	
+background-image:linear-gradient(#a2a2a2,#828282);
+font-size: 0px;	
+margin-top:0px;
+	
+	color:white;
+	
+	
+	
+}
+
+#registration
+{
+		background-color:white;
+		color:black;
+	
+	padding-top:10px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:100px;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	border-radius:20px;
+
+text-align:center;
+	
+}
+#expence
+{
+		background-color:white;
+		color:black;
+
+	padding:50px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:100px;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	border-radius:20px;
+display: inline-block;
+	text-align: center;
+
+}
+
+#balance
+{
+		background-color:white;
+		color:black;
+
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:100px;
+	-webkit-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	box-shadow: 3px 3px 30px 5px rgba(204,204,204,0.9);
+	border-radius:20px;
+display: inline-block;
+
+	text-align: center;
+	
+
+	
+}
+ul>li
+{
+	
+	
+font-size: 20px;	
+
+	list-style-type:none;
+
+	float:left;
+
+
+}
+li:hover
+{
+	
+	background-color: #919191;
+	cursor:pointer;
+	color:#ffffff;
+
+}
+ul
+{
+	display: inline-block;
+
+}
+
+
+ul a
+{
+	color: #ffffff;
+	text-decoration: none;
+	display:block;
+	padding:15px;
+	
+	
+}
+
+
+
+
+input[type=reset],
+input[type=text],
+input[type=email],
+input[type=password],
+input[type=number]
+
+{
+	background-color:#efefef;
+	color:#666;
+	border: 2px solid #ddd;
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+	font-size:20px;
+padding:10px;
+	box-sizing:border-box;
+	outline:none;
+	margin-top:10px;
+
+
+}
+input[type=reset]:focus, 
+input[type=text]:focus, 
+input[type=password]:focus,
+input[type=email]:focus,
+input[type=number]:focus
+{
+	-webkit-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 10px 2px rgba(204,204,204,0.9);	
+	border: 2px solid #a5cda5;
+	background-color:#e9f3e9;
+	color:#428c42;
+	
+	
+}
+
+
+input::-webkit-input-placeholder
+{
+    color: #999;
+}
+input:focus::-webkit-input-placeholder
+{
+    color: #428C42;
+}
+/* Firefox < 19 */
+input:-moz-placeholder
+{
+    color: #999;
+}
+input:focus:-moz-placeholder
+{
+    color: #428C42;
+}
+/* Firefox > 19 */
+input::-moz-placeholder
+{
+    color: #999;
+}
+input:focus::-moz-placeholder
+{
+    color: #428C42;
+}
+/* Internet Explorer 10 */
+input:-ms-input-placeholder
+{
+    color: #999;
+}
+input:focus:-ms-input-placeholder
+{
+    color: #428C42;
+}
+.cat>input[type=text],
+.cat>input[type=number]
+{
+	width:150px;
+	font-size:15px;
+	padding:5px;
+	margin-top:0px;
+}
+#subtitle
+{
+	background-color:#828282;
+	font-size: 40px;
+	padding:10px;
+}
+input[type=date]
+{
+		width:170px;
+	background-color:#efefef;
+	color:#666;
+	border: 2px solid #ddd;
+	border-radius:5px;
+	font-size:15px;
+	padding:10px;
+	box-sizing:border-box;
+	outline:none;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+.cat
+{
+	float:left;
+	text-align:center;
+
+
+
+
+}
+.cattitle
+{
+	font-weight:bold;
+
+	
+}
+#bilancePeriod
+{
+	text-align:right;
+	color:#970271;
+	font-weight:bold;
+
+}
+#incomeTable
+{
+	
+	text-align: center;
+	font-size:25px;
+
+	float:left;
+font-weight:bold;
+
+	
+}
+#expenseTable
+{
+	text-align: center;
+	
+font-weight:bold;
+	float:left;
+
+	font-size:25px;
+}
+
+
+
+#incomeTable  table
+{
+	border-color:green;
+	
+}
+#expenseTable  table
+{
+	border-color:red;
+	
+}
+
+
+
+table
+{
+	display: inline-block;
+	margin:20px;
+	text-align: center;
+	border:6px solid black;
+	font-size: 17px;
+	font-weight:normal;
+	border-radius:5px;
+
+	}
+td
+{
+	padding:20px;
+	border:2px solid black !important;
+	border-width:2px;
+}
+
+
+.icons {
+	float:left;
+margin-top:10px;
+
+}
+.inputx {
+	float:left;
+	
+	
+}
+input[type=submit] 
+{
+
+	
+	background-color:#37b93d;
+	font-size:20px;
+	color:white;
+	padding: 15px 10px;
+	margin-top:10px;
+	border:none;
+	border-radius:5px;
+	cursor:pointer;
+	letter-spacing:2px;
+	outline:none;
+	margin-bottom:20px;
+	
+}
+
+
+input[type=submit]:focus
+
+{
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);
+	-moz-box-shadow: 0px 0px 10px 5px rgba(204,204,204,0.9);
+	box-shadow: 0px 0px 15px 5px rgba(204,204,204,0.9);	
+	
+}
+input[type=submit]:hover
+{
+	background-color:#37b93d;
+}
+.add>input[type=submit]:hover
+{
+	background-color:#37b93d;
+}
+.add>input[type=submit] 
+{
+
+	background-color:#36b03c;
+	
+	
+	
+}
+.abort>input[type=submit]:hover
+{
+	background-color:#ef1d1e;
+}
+.abort>input[type=submit] 
+{
+
+	background-color:#de0c0d;
+	
+	
+	
+}
+.quote
+{
+	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
+
+font-family: 'Roboto', sans-serif;
+font-size:15px;
+}
+.welcome
+{
+	color:green;
+
+}
+.money
+{
+	width:300px;
+	height:200px;
+display:inline-block;
+
+}
+.elem
+{
+
+display:inline-block;
+padding:30px;
+	text-align:center;
+
+	
+}
+
+.container-fluid
+{
+	text-align:center;
+}
+nav
+{
+	padding:0px;
+	margin:0px;
+	margin-top:0px;
+	
+}
+.dates
+{
+		text-align: center;
+	font-size:25px;
+
+	float:left;
+font-weight:bold;
+	
+}
+#reglog
+{
+	font-size:0px;
+	
+}
+ #expence input[type=text]
+{
+	border-radius:5px;	
+
+}
+.welcomebold
+{
+	font-weight:bold;
+	font-size:40px;
+
+}
+
+
+
+.error
+{
+	font-size:15px;
+	color:red;
+}
+input[type=number]
+{
+		border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+}
+
+.inc
+{
+	
+	font-size:17px;
+	color:#008000;
+font-weight:normal;
+	
+}
+.exp
+{
+font-size:17px;
+	color:red;
+font-weight:normal;
+}
+
+#datebutton input[type=submit]
+{margin-top:20px;
+	margin-right:110px;
+}
+input[type=radio]
+{
+	margin-right:5px;
+}

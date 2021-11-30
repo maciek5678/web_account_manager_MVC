@@ -1,0 +1,137 @@
+						{% extends "base2.html" %}
+			 {% block menu3  %} class="nav-link disabled"
+			 		{% endblock %}
+								    {% block footer %}
+
+
+
+
+    <script>
+
+        $(document).ready(function() {
+
+            /**
+             * Validate the form
+             */
+            $('#addincome').validate({
+                rules: {
+
+                    data: {
+                        required: true,
+
+                    },
+					                    kwota: {
+                        required: true,
+
+
+                    }
+                },
+                messages: {
+                    data: {
+                        remote: 'Istnieje już użytkownik o takim adresie e-mail',
+						required:'To pole jest wymagane'
+                    },
+					                    kwota: {
+                        remote: 'Istnieje już użytkownik o takim loginie',
+						required:'To pole jest wymagane'
+                    }
+					
+                }
+            });
+
+
+            /**
+              * Show password toggle button
+              */
+
+        });
+					{% endblock %}
+				{% block body %}
+			
+			<div id="subtitle">
+			Dodaj wydatek
+			</div>
+			<div id="expence" class="col-8 col-xl-6">
+				<form method="post" action="/Addexpense/add" id="addincome">
+					<div class="cattitle col-12">Data</div>
+						<br/>    
+						<input type="date" id="data" name="data"><br/>
+					    {% if expenses.errors_data is not empty %}
+	{% for error in expenses.errors_data %}
+  <div class="error">{{ error}}</div>
+            {% endfor %}
+			{% endif %}
+						<br/>
+						<div class="cattitle col-12">Kwota</div>
+
+						<br/>
+						<div class ="cat col-12 ">
+						<input type="number"  placeholder="wpisz kwotę" onfocus="this.placeholder='wpisz kwotę'" onblur="this.placeholder='wpisz kwotę'" name="kwota" min="0.01" step="0.01"/>
+					    {% if expenses.errors_kwota is not empty %}
+	{% for error in expenses.errors_kwota %}
+  <div class="error">{{ error}}</div>
+            {% endfor %}
+			{% endif %}
+						<br/>
+						<br/>
+						</div>
+						<div class="cattitle">Sposób płatności</div>
+						<br/>
+						<label><input type="radio" name="platnosc"  value="Gotówka"  checked />Gotówka</label><br/>
+						<label><input type="radio" name="platnosc" value="Karta debetowa"/>Karta debetowa</label>		<br/>
+						<label><input type="radio" name="platnosc"value="Karta kredytowa"/>Karta kredytowa</label>	<br/>
+						<br/>
+						<div class="cattitle">Kategoria</div>
+						<br/>
+						<div class ="cat col-12 col-lg-6 col-xxl-3">
+						<label><input type="radio" name="category" value="Transport" checked  />Transport</label><br/>
+						<label><input type="radio" name="category" value="Książki"/>Książki</label><br/>
+							<label><input type="radio" name="category" value="Jedzienie"/>Jedzienie</label><br/>
+
+							
+						</div>
+						<div class ="cat col-12 col-lg-6 col-xxl-3">
+						<label><input type="radio" name="category" value="Mieszkanie"/>Mieszkanie</label><br/>
+							<label><input type="radio" name="category" value="Telekomunikacja"/>Telekomunikacja</label><br/>
+							<label><input type="radio" name="category" value="Opieka zdrowotna"/>Opieka zdrowotna</label><br/>
+							
+						</div>
+						<div class ="cat col-12 col-lg-6 col-xxl-3">
+						<label><input type="radio" name="category" value="Ubranie" />Ubranie</label><br/>
+							<label><input type="radio" name="category" value="Higiena" />Higiena</label><br/>
+							<label><input type="radio" name="category" value="Dzieci" />Dzieci</label><br/>
+						</div>
+						<div class ="cat col-12 col-lg-6 col-xxl-3">
+						<label><input type="radio" name="category" value="Rozrywka" />Rozrywka</label><br/>
+							<label><input type="radio" name="category" value="Wycieczka" />Wycieczka</label><br/>
+							<label><input type="radio" name="category" value="Oszczędności"/>Oszczędności</label><br/>
+							
+						</div>
+						<div class ="cat col-12 col-lg-6">
+							
+							<label><input type="radio" name="category" value="Na złotą jesień, czyli emeryturę" />Na złotą jesień, czyli emeryturę</label><br/>
+							<label><input type="radio" name="category" value="Spłata długów" />Spłata długów</label><br/>
+						</div>
+						<div class ="cat col-12 col-lg-6">
+							<label><input type="radio" name="category" value="Darowizna"/>Darowizna</label><br/>
+							<label><input type="radio" name="category" id="Another" value="Another" />Inne</label> 
+						</div>
+						<div style ="clear:both;"></div>
+						<br/>
+												<div class="cattitle col-12">Komentarz</div>
+						<br/>
+						<div class ="cat col-12 ">
+						
+						<input type="text"  placeholder="wpisz komentarz" onfocus="this.placeholder='wpisz komentarz'" onblur="this.placeholder='wpisz komentarz'"  name="komentarz"  />
+						<br/>
+						<br/>
+						</div>
+						<span class ="add">
+							<input type="submit"  value="Dodaj"/>	
+						</span>
+						<span class ="abort">
+							<input type="submit" value="Anuluj" />		
+						</span>					
+				</form>
+			</div>
+					{% endblock %}

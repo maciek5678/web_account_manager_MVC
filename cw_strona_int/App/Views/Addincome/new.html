@@ -1,0 +1,70 @@
+			{% extends "base2.html" %}
+			 {% block menu2  %} class="nav-link disabled"
+			 		{% endblock %}
+				{% block body %}
+
+<div id="subtitle">
+			Dodaj przychód
+			</div>
+				<div id="expence" class="col-8 col-xl-6">
+					<form method="post" action="/addincome/add">				
+						<div class="cattitle col-12">Data</div>
+						<br/>    
+						<input type="date" id="data" name="data"><br/>
+											    {% if incomes.errors_data is not empty %}
+	{% for error in incomes.errors_data %}
+  <div class="error">{{ error}}</div>
+            {% endfor %}
+			{% endif %}
+	
+						<br/>
+						<div class="cattitle col-12">Kwota</div>
+						<br/>
+						<div class ="cat col-12 ">
+							<input id="amount" type="number"   name="kwota" min="0.01" step="0.01"/>
+												    {% if incomes.errors_kwota is not empty %}
+	{% for error in incomes.errors_kwota %}
+  <div class="error">{{ error}}</div>
+            {% endfor %}
+			{% endif %}
+
+							<br/>
+							<br/>
+						 </div>
+						<div class="cattitle">Kategoria</div>
+						<br/>
+						<div class ="cat col-12 ">
+							<label><input type="radio" name="przychod" value="Wynagrodzenie" checked />Wynagrodzenie</label><br/>
+							<label><input type="radio" name="przychod" value="Odsetki bankowe"/>Odsetki bankowe</label>		<br/>
+							<label><input type="radio" name="przychod" value="Sprzedaż na allegro"/>Sprzedaż na allegro</label>	<br/>
+							<label><input type="radio" name="przychod" id="Other" value="Inne"/>Inne</label> 
+							
+
+						</div>				
+						<div style ="clear:both;"></div>
+												<br/>
+												<div class="cattitle col-12">Komentarz</div>
+						<br/>
+						<div class ="cat col-12 ">
+						
+						<input type="text"  name="komentarz" />
+						<br/>
+						<br/>
+
+						</div>
+						
+						
+						<span class ="add">
+							<input type="submit"  value="Dodaj"/>	
+						</span>
+						<span class ="abort">
+							<input type="submit" value="Anuluj" />		
+						</span>	
+					<div id="c" class ="col-12" >
+					</div>						
+					</form>
+				</div>
+		</div>
+
+		
+		{% endblock %}

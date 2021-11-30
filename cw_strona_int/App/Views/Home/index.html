@@ -1,0 +1,26 @@
+		    
+{% extends "base.html" %}
+
+			{% block body %}
+	
+			<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
+				Zaloguj się
+				<form id="reglog" method="post" action="/Menu/loggedin">
+				<i class="icon-user  "></i>
+					<input  class="col-8 col-md-6" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'"  name="username">
+					<div style="clear:both;"></div>					
+					<i class="icon-lock"></i>
+					<input  class="col-8 col-md-6"  type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='haslo'"  name="pass">	
+					    {% if  user is   empty%}
+
+  <div class="error">Nieprawidłowy login lub hasło</div>
+
+
+    {% endif %}
+					<div style="clear:both;"></div>
+					<input type="submit" value="Zaloguj się">
+							
+
+				</form>
+			</div>
+    {% endblock %}
