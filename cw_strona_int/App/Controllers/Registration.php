@@ -13,69 +13,46 @@ use \App\Auth;
 class Registration extends \Core\Controller
 {
 
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
-    {
-        //echo "(before) ";
-        //return false;
-    }
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
     public function newAction()
     {
-   if(Auth::isloggedin()){
-	
-					$this->redirect('/Menu/loggedin');
-	
-}else{
-        View::renderTemplate('Registration/new.html');
-}
+	   if(Auth::isloggedin())
+	   {
+		
+			$this->redirect('/Menu/loggedin');
+		
+		}
+		else
+		{
+			View::renderTemplate('Registration/new.html');
+		}
     }
 	
-	    public function addAction()
+	public function addAction()
     {
          $user = new User($_POST);
 
-        if ($user->save()) {
-$id=$user->getUserId($_POST['login']);
-$user->copyCategory($id);
-$user->copyPayment($id);
-$user->copyCategoryInc($id);
+		if ($user->save()) 
+		{
+			$id=$user->getUserId($_POST['login']);
+			$user->copyCategory($id);
+			$user->copyPayment($id);
+			$user->copyCategoryInc($id);
 
             $this->redirect('/Registration/success');
 
-        } else {
+		} 
+		else 
+		{
 
-            View::renderTemplate('Registration/new.html', [
+				View::renderTemplate('Registration/new.html', [
                 'user' => $user
-            ]);
+				]);
 
-        }
+		}
     }
-	    public function successAction()
+	public function successAction()
     {
    
         View::renderTemplate('Registration/success.html');
     }
-	
-	
-	
 }

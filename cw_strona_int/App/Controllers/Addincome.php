@@ -15,61 +15,39 @@ use \App\Auth;
 class Addincome extends \Core\Controller
 {
 
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
-    {
-        //echo "(before) ";
-        //return false;
-    }
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
     public function newAction()
     {
-if(Auth::isloggedin()){
+		if(Auth::isloggedin())
+		{
         View::renderTemplate('Addincome/new.html');
-} else{
+		} 
+		else
+		{
             $this->redirect('/');
-	
-}
+		}
     }
 	
-	    public function addAction()
+	public function addAction()
     {
-if(Auth::isloggedin()){
+		if(Auth::isloggedin())
+		{
          $incomes = new Incomes($_POST);
-if($incomes->save($_SESSION['user_id']))
-{
+		if($incomes->save($_SESSION['user_id']))
+			{
 
-        View::renderTemplate('Addincome/new.html');
-}else{
+			View::renderTemplate('Addincome/new.html');
+			}
+			else
+			{
 		        View::renderTemplate('Addincome/new.html', [
-			 'incomes' => $incomes
-			
-			
-			
-			]);
-}
-} else{
+				'incomes' => $incomes
+				]);
+			}
+		} 
+		else
+		{
             $this->redirect('/');
 	
-}
+		}
     }
 }

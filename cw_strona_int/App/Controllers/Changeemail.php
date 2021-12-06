@@ -14,70 +14,43 @@ use \App\Auth;
 class Changeemail extends \Core\Controller
 {
 
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
+	public function newAction()
     {
-        //echo "(before) ";
-        //return false;
-    }
+		if(Auth::isloggedin())
+		{
+	        
+			
+			View::renderTemplate('Changeemail/new.html');
+						
+		}
 
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
-    public function newAction()
-    {
-if(Auth::isloggedin()){
-	        View::renderTemplate('Changeemail/new.html');
-					
-	
-
-	
-}
-
-else{
+		else
+		{
  				$this->redirect('/');
-    }
+		}
 	}
-		    public function changeAction()
+
+	public function changeAction()
     {
-if(Auth::isloggedin()){
-	$user= new User($_POST);
-	if($user->changeemail())
-	{
+		if(Auth::isloggedin())
+		{
+			$user= new User($_POST);
+			if($user->changeemail())
+			{
 	
-	        View::renderTemplate('Changeemail/success.html');
+				View::renderTemplate('Changeemail/success.html');
 					
-	
-
-	}
-	else
-	{
-		View::renderTemplate('Changeemail/new.html',[
-		'user' => $user
-		
-		
-		]);
-	}
-}
-
-else{
- 				$this->redirect('/');
-    }
+			}
+			else
+			{
+			View::renderTemplate('Changeemail/new.html',[
+			'user' => $user
+			]);
+			}
+		}
+		else
+		{
+ 			$this->redirect('/');
+		}
 	}
 }

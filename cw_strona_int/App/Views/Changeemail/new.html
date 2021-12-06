@@ -1,45 +1,29 @@
-			{% extends "base2.html" %}
-
-				{% block body %}
-
-			<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
-			Zmień e-mail
-
-				<form id="reglog" method="post" action="/Changeemail/change" >
-
-			
-
-					
-					
-					<div style="clear:both;"></div>		
-					
-						<i class="icon-mail-alt"></i>	>					
-					<input class="col-8 col-md-6" type="email" placeholder="stary e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='stary e-mail'"  name="email" required>
-  					    {% if user.errors_mail is not empty %}
-	{% for error in user.errors_mail %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-			{% endif %}	
-					
-					<div style="clear:both;"></div>					
-						<i class="icon-mail-alt"></i>						
-					<input class="col-8 col-md-6" type="email" placeholder="nowy e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='nowy e-mail'"  name="newemail" required>
- 				    {% if user.errors_newmail is not empty %}
-	{% for error in user.errors_newmail %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-			{% endif %}	
-					
-					<div style="clear:both;"></div>					
-						<i class="icon-mail-alt"></i>						
-					<input class="col-8 col-md-6" type="email" placeholder="powtórz e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz e-mail'"  name="newemail2" required>					
-					<div style="clear:both;"></div>
-					<input type="submit" value="Zmień e-mail">
-	
-					
-				</form>
-			</div>
-
-
-		
-		{% endblock %}
+{% extends "base2.html" %}
+{% block body %}
+	<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
+		Zmień e-mail
+		<form id="reglog" method="post" action="/Changeemail/change" >
+		<div style="clear:both;"></div>		
+			<i class="icon-mail-alt"></i>				
+			<input class="col-8 col-md-6" type="email" placeholder="stary e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='stary e-mail'"  name="email" required>
+			{% if user.errors_mail is not empty %}
+				{% for error in user.errors_mail %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}						
+			<div style="clear:both;"></div>					
+			<i class="icon-mail-alt"></i>						
+			<input class="col-8 col-md-6" type="email" placeholder="nowy e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='nowy e-mail'"  name="newemail" required>
+			{% if user.errors_newmail is not empty %}
+				{% for error in user.errors_newmail %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}						
+			<div style="clear:both;"></div>					
+			<i class="icon-mail-alt"></i>						
+			<input class="col-8 col-md-6" type="email" placeholder="powtórz e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz e-mail'"  name="newemail2" required>					
+			<div style="clear:both;"></div>
+			<input type="submit" value="Zmień e-mail">				
+		</form>
+	</div>
+{% endblock %}

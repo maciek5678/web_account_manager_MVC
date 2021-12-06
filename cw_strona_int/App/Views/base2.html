@@ -2,17 +2,17 @@
 <html lang="pl">
 	<head>
 
-		<meta charset="utf-8"/>
-		<title>O$zczedzaj pieniądze</title>
-		<script  src="/js/timer.js"> </script>
-		<meta name="description" content="Strona przeznaczona do oszczedzania pieniedzy"/>
-		<meta name="keywords" content="bilans, przychod,wydatek "/>	
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />  	
-		<link rel="stylesheet" href="/main.css" type="text/css" />
-		<link rel="stylesheet" href="/css/fontello.css" type="text/css" />
+	<meta charset="utf-8"/>
+	<title>O$zczedzaj pieniądze</title>
+	<script  src="/js/timer.js"> </script>
+	<meta name="description" content="Strona przeznaczona do oszczedzania pieniedzy"/>
+	<meta name="keywords" content="bilans, przychod,wydatek "/>	
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />  	
+	<link rel="stylesheet" href="/main.css" type="text/css" />
+	<link rel="stylesheet" href="/css/fontello.css" type="text/css" />
 	<link rel="stylesheet" href="/css/bootstrap.css"/>	
-		<link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Style+Script&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 		
 	</head>
 
@@ -21,74 +21,68 @@
 			<div id="title">
 				<img  id="dollar" src="/img/dolar.png" alt="dolar"/>O$zczedzaj pieniądze
 				<div class="quote">
-			Żyje się za pieniądze, ale nie warto żyć dla pieniędzy. Wszystko, co można dostać za pieniądze, jest tanie.</div>
+				Żyje się za pieniądze, ale nie warto żyć dla pieniędzy. Wszystko, co można dostać za pieniądze, jest tanie.</div>
 			</div>
-		 <nav class="navbar navbar-expand-xxl navbar-dark bg-secondary">
-		 <div class="container-fluid ">
+			<nav class="navbar navbar-expand-xxl navbar-dark bg-secondary">
+				<div class="container-fluid ">
 	
-		 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-	  
-    </button>
-	<div class="collapse navbar-collapse " id="navbarSupportedContent">
-				<ul class="navbar-nav">
-				<li class="navbar-item">
-				<a {% block menu1  %}      {% endblock %}		href="/menu/loggedin">
-							<i class="icon-home"></i>
-							Menu Główne
-							</a>
-				</li>
-				<li class="navbar-item">
-					<a {% block menu2  %}      {% endblock %}		 href="/Addincome/new">
-							<i class="icon-dollar"></i>
-							Dodaj przychód
-							</a>
-				</li>
-				<li class="navbar-item">
-				<a {% block menu3  %}      {% endblock %}	 href="/Addexpense/new">
-							<i class="icon-basket-1"></i>
-							Dodaj wydatek
-							</a>
-				</li>
-				<li class="navbar-item">
-				<a {% block menu4  %}      {% endblock %}	 href="/Balanceoverwiev/new">
-							<i class="icon-chart-line"></i>
-							Przeglądaj bilans
-							</a>
-				</li>
-				<li class="navbar-item dropdown">
-							<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
-							<i class="icon-wrench"></i>
-							Ustawienia
-							</a>
-											<div class="dropdown-menu bg-secondary">
-						
-							<a class="dropdown-item" href="/Changelogin/new"> Zmień login</a>
-							<a class="dropdown-item" href="/Changepassword/new"> Zmień hasło </a>
-							<a class="dropdown-item" href="/Changeemail/new"> Zmień e-mail </a>
-						
-						</div>		
-							
-							
-						</li>
-						<li class="navbar-item">
-							<a 	 href="/menu/loggedout">
-							<i class="icon-logout"></i>
-							Wyloguj się
-							</a>
-						</li>
-						
-						
-
-						
-				
-</ul>
-					
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>	  
+					</button>
+					<div class="collapse navbar-collapse " id="navbarSupportedContent">
+							<ul class="navbar-nav">
+								<li class="navbar-item">
+								<a {% block menu1  %}      {% endblock %}		href="/menu/loggedin">
+											<i class="icon-home"></i>
+											Menu Główne
+											</a>
+								</li>
+								<li class="navbar-item">
+									<a {% block menu2  %}      {% endblock %}		 href="/Addincome/new">
+										<i class="icon-dollar"></i>
+										Dodaj przychód
+									</a>
+								</li>
+								<li class="navbar-item">
+									<a {% block menu3  %}      {% endblock %}	 href="/Addexpense/new">
+										<i class="icon-basket-1"></i>
+										Dodaj wydatek
+									</a>
+								</li>
+								<li class="navbar-item">
+									<a {% block menu4  %}      {% endblock %}	 href="/Balanceoverwiev/new">
+										<i class="icon-chart-line"></i>
+										Przeglądaj bilans
+									</a>
+								</li>
+								<li class="navbar-item dropdown">
+									<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown">
+										<i class="icon-wrench"></i>
+										Ustawienia
+									</a>
+									<div class="dropdown-menu bg-secondary">
+									
+										<a class="dropdown-item" href="/Changelogin/new"> Zmień login</a>
+										<a class="dropdown-item" href="/Changepassword/new"> Zmień hasło </a>
+										<a class="dropdown-item" href="/Changeemail/new"> Zmień e-mail </a>
+										
+									</div>		
+											
+											
+								</li>
+								<li class="navbar-item">
+									<a 	 href="/menu/loggedout">
+									<i class="icon-logout"></i>
+										Wyloguj się
+									</a>
+								</li>
+							</ul>
+								
+					</div>
 	</div>
-  </div>
-</nav>
-				    {% block body %}
-    {% endblock %}		
+			</nav>
+			{% block body %}
+			{% endblock %}		
 
 		</div>
 				<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>

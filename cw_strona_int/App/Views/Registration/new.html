@@ -1,16 +1,8 @@
 {% extends "base.html" %}
-			    {% block footer %}
-
-
-
-
+{% block footer %}
     <script>
 
         $(document).ready(function() {
-
-            /**
-             * Validate the form
-             */
             $('#reglog').validate({
                 rules: {
 
@@ -26,7 +18,7 @@
                     },
 										                    password: {
                         required: true,
-						minlength: 6,
+						minlength: 6
 
 
                     },
@@ -56,64 +48,44 @@
                 }
             });
 
-
-            /**
-              * Show password toggle button
-              */
-
         });
    
     </script>
 				
-    {% endblock %}
-			{% block body %}
-
-
-			<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
-			Zarejestruj się
-
-				<form id="reglog" method="post" action="/Registration/add" >
-					<i class="icon-mail-alt"></i>				
-					<input class="col-8 col-md-6" type="email" placeholder="e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='e-mail'"  name="email" required>
-					<br/>
-			
-					    {% if user.errors_mail is not empty %}
-	{% for error in user.errors_mail %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-
-    {% endif %}
-					
-					
-					<div style="clear:both;"></div>		
-					
-					<i class="icon-user"></i>
-					<input class="col-8 col-md-6" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" name="login" required>
-    {% if user.errors_login is not empty %}
-	{% for error in user.errors_login %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-
-    {% endif %}
-					
-					<div style="clear:both;"></div>					
-					<i class="icon-lock"></i>
-					<input class="col-8 col-md-6" type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='haslo'" name="password" required>
-    {% if user.errors_password is not empty %}
-	{% for error in user.errors_password %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-
-    {% endif %}
-					
-					<div style="clear:both;"></div>					
-					<i class="icon-lock"></i>					
-					<input class="col-8 col-md-6" type="password" placeholder="powtórz hasło" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz hasło'" name="password2" required>					
-					<div style="clear:both;"></div>
-					<input type="submit" value="Zarejestruj się">
-	
-					
-				</form>
-			</div>
-			
-			    {% endblock %}
+{% endblock %}
+{% block body %}
+	<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
+		Zarejestruj się
+		<form id="reglog" method="post" action="/Registration/add" >
+			<i class="icon-mail-alt"></i>				
+			<input class="col-8 col-md-6" type="email" placeholder="e-mail" onfocus="this.placeholder=''" onblur="this.placeholder='e-mail'"  name="email" required>
+			<br/>
+			{% if user.errors_mail is not empty %}
+				{% for error in user.errors_mail %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}
+			<div style="clear:both;"></div>		
+			<i class="icon-user"></i>
+			<input class="col-8 col-md-6" type="text" placeholder="login" onfocus="this.placeholder=''" onblur="this.placeholder='login'" name="login" required>
+			{% if user.errors_login is not empty %}
+				{% for error in user.errors_login %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}
+			<div style="clear:both;"></div>					
+			<i class="icon-lock"></i>
+			<input class="col-8 col-md-6" type="password" placeholder="hasło" onfocus="this.placeholder=''" onblur="this.placeholder='haslo'" name="password" required>
+			{% if user.errors_password is not empty %}
+				{% for error in user.errors_password %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}
+			<div style="clear:both;"></div>					
+			<i class="icon-lock"></i>					
+			<input class="col-8 col-md-6" type="password" placeholder="powtórz hasło" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz hasło'" name="password2" required>					
+			<div style="clear:both;"></div>
+			<input type="submit" value="Zarejestruj się">		
+		</form>
+	</div>		
+{% endblock %}

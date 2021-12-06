@@ -1,12 +1,12 @@
-						{% extends "base2.html" %}
-			 {% block menu3  %} class="nav-link disabled"
-			 		{% endblock %}
-								    {% block footer %}
+{% extends "base2.html" %}
+{% block menu3  %} class="nav-link disabled"
+{% endblock %}
+{% block footer %}
 
 
 
 
-    <script>
+ <script>
 
         $(document).ready(function() {
 
@@ -14,37 +14,39 @@
              * Validate the form
              */
             $('#addincome').validate({
-                rules: {
+                rules: 
+					{
 
-                    data: {
-                        required: true,
+						data: 
+						{
+							required: true,
 
-                    },
-					                    kwota: {
-                        required: true,
+						},
+						kwota: 
+						{
+							required: true,
 
 
-                    }
-                },
-                messages: {
-                    data: {
-                        remote: 'Istnieje już użytkownik o takim adresie e-mail',
-						required:'To pole jest wymagane'
-                    },
-					                    kwota: {
-                        remote: 'Istnieje już użytkownik o takim loginie',
-						required:'To pole jest wymagane'
-                    }
+						}
+					},
+					messages: 
+					{
+						data: 
+						{
+							remote: 'Istnieje już użytkownik o takim adresie e-mail',
+							required:'To pole jest wymagane'
+						},
+					    kwota: 
+						{
+							remote: 'Istnieje już użytkownik o takim loginie',
+							required:'To pole jest wymagane'
+						}
 					
-                }
+					}
             });
 
-
-            /**
-              * Show password toggle button
-              */
-
         });
+</script>
 					{% endblock %}
 				{% block body %}
 			
@@ -66,14 +68,14 @@
 
 						<br/>
 						<div class ="cat col-12 ">
-						<input type="number"  placeholder="wpisz kwotę" onfocus="this.placeholder='wpisz kwotę'" onblur="this.placeholder='wpisz kwotę'" name="kwota" min="0.01" step="0.01"/>
-					    {% if expenses.errors_kwota is not empty %}
-	{% for error in expenses.errors_kwota %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-			{% endif %}
-						<br/>
-						<br/>
+							<input type="number"  placeholder="wpisz kwotę" onfocus="this.placeholder='wpisz kwotę'" onblur="this.placeholder='wpisz kwotę'" name="kwota" min="0.01" step="0.01"/>
+							{% if expenses.errors_kwota is not empty %}
+								{% for error in expenses.errors_kwota %}
+									<div class="error">{{ error}}</div>
+								{% endfor %}
+							{% endif %}
+							<br/>
+							<br/>
 						</div>
 						<div class="cattitle">Sposób płatności</div>
 						<br/>
@@ -84,25 +86,25 @@
 						<div class="cattitle">Kategoria</div>
 						<br/>
 						<div class ="cat col-12 col-lg-6 col-xxl-3">
-						<label><input type="radio" name="category" value="Transport" checked  />Transport</label><br/>
-						<label><input type="radio" name="category" value="Książki"/>Książki</label><br/>
-							<label><input type="radio" name="category" value="Jedzienie"/>Jedzienie</label><br/>
+							<label><input type="radio" name="category" value="Transport" checked  />Transport</label><br/>
+							<label><input type="radio" name="category" value="Książki"/>Książki</label><br/>
+							<label><input type="radio" name="category" value="Jedzenie"/>Jedzenie</label><br/>
 
-							
+								
 						</div>
 						<div class ="cat col-12 col-lg-6 col-xxl-3">
-						<label><input type="radio" name="category" value="Mieszkanie"/>Mieszkanie</label><br/>
+							<label><input type="radio" name="category" value="Mieszkanie"/>Mieszkanie</label><br/>
 							<label><input type="radio" name="category" value="Telekomunikacja"/>Telekomunikacja</label><br/>
 							<label><input type="radio" name="category" value="Opieka zdrowotna"/>Opieka zdrowotna</label><br/>
 							
 						</div>
 						<div class ="cat col-12 col-lg-6 col-xxl-3">
-						<label><input type="radio" name="category" value="Ubranie" />Ubranie</label><br/>
+							<label><input type="radio" name="category" value="Ubranie" />Ubranie</label><br/>
 							<label><input type="radio" name="category" value="Higiena" />Higiena</label><br/>
 							<label><input type="radio" name="category" value="Dzieci" />Dzieci</label><br/>
 						</div>
 						<div class ="cat col-12 col-lg-6 col-xxl-3">
-						<label><input type="radio" name="category" value="Rozrywka" />Rozrywka</label><br/>
+							<label><input type="radio" name="category" value="Rozrywka" />Rozrywka</label><br/>
 							<label><input type="radio" name="category" value="Wycieczka" />Wycieczka</label><br/>
 							<label><input type="radio" name="category" value="Oszczędności"/>Oszczędności</label><br/>
 							
@@ -118,13 +120,13 @@
 						</div>
 						<div style ="clear:both;"></div>
 						<br/>
-												<div class="cattitle col-12">Komentarz</div>
+						<div class="cattitle col-12">Komentarz</div>
 						<br/>
 						<div class ="cat col-12 ">
-						
-						<input type="text"  placeholder="wpisz komentarz" onfocus="this.placeholder='wpisz komentarz'" onblur="this.placeholder='wpisz komentarz'"  name="komentarz"  />
-						<br/>
-						<br/>
+							
+							<input type="text"  placeholder="wpisz komentarz" onfocus="this.placeholder='wpisz komentarz'" onblur="this.placeholder='wpisz komentarz'"  name="komentarz"  />
+							<br/>
+							<br/>
 						</div>
 						<span class ="add">
 							<input type="submit"  value="Dodaj"/>	
@@ -134,4 +136,4 @@
 						</span>					
 				</form>
 			</div>
-					{% endblock %}
+		{% endblock %}

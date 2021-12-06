@@ -14,71 +14,48 @@ use \App\Auth;
 class Changepassword extends \Core\Controller
 {
 
-    /**
-     * Before filter
-     *
-     * @return void
-     */
-    protected function before()
-    {
-        //echo "(before) ";
-        //return false;
-    }
-
-    /**
-     * After filter
-     *
-     * @return void
-     */
-    protected function after()
-    {
-        //echo " (after)";
-    }
-
-    /**
-     * Show the index page
-     *
-     * @return void
-     */
     public function newAction()
     {
-if(Auth::isloggedin()){
-	        View::renderTemplate('Changepassword/new.html');
-					
-	
+	if(Auth::isloggedin())
+		{
+					View::renderTemplate('Changepassword/new.html');
+							
+			
+		}
 
-	
-}
-
-else{
- 				$this->redirect('/');
-    }
+		else
+		{
+					$this->redirect('/');
+		}
 	}
 	
-		    public function changeAction()
+	public function changeAction()
     {
-if(Auth::isloggedin()){
+	if(Auth::isloggedin())
+		{
 	$user= new User($_POST);
-	if($user->changepassword())
-	{
+		if($user->changepassword())
+			{
 	
-	        View::renderTemplate('Changepassword/success.html');
+				View::renderTemplate('Changepassword/success.html');
 					
 	
 
-	}
-	else
-	{
-		View::renderTemplate('Changepassword/new.html',[
-		'user' => $user
+			}
+			else
+			{
+				
+				
+			View::renderTemplate('Changepassword/new.html',[
+			'user' => $user
 		
-		
-		]);
-	}
-}
+			]);
+			}
+		}
 
-else{
- 				$this->redirect('/');
-    }
+		else
+		{
+			$this->redirect('/');
+		}
 	}
 }

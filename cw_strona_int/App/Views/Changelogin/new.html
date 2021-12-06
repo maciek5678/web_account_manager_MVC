@@ -1,43 +1,32 @@
-			{% extends "base2.html" %}
+{% extends "base2.html" %}
+{% block body %}
 
-				{% block body %}
-
-			<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
-			Zmień login
-
-				<form id="reglog" method="post" action="/Changelogin/change" >
-
-			
-
-					
-					
-					<div style="clear:both;"></div>		
-					
-				<i class="icon-user  "></i>
-					<input  class="col-8 col-md-6" type="text" placeholder="stary login" onfocus="this.placeholder=''" onblur="this.placeholder='stary login'"  name="username" required>
- 					    {% if user.errors_login is not empty %}
-	{% for error in user.errors_login %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
+	<div id="registration" class="col-8  col-md-6 col-lg-4 col-xl-3">
+		Zmień login
+		<form id="reglog" method="post" action="/Changelogin/change" >		
+			<div style="clear:both;"></div>							
+			<i class="icon-user  "></i>
+			<input  class="col-8 col-md-6" type="text" placeholder="stary login" onfocus="this.placeholder=''" onblur="this.placeholder='stary login'"  name="username" required>
+ 			{% if user.errors_login is not empty %}
+				{% for error in user.errors_login %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
 			{% endif %}			
-					<div style="clear:both;"></div>					
-				<i class="icon-user  "></i>
-					<input  class="col-8 col-md-6" type="text" placeholder="nowy login" onfocus="this.placeholder=''" onblur="this.placeholder='nowy login'"  name="newusername" required>
-  					    {% if user.errors_newlogin is not empty %}
-	{% for error in user.errors_newlogin %}
-  <div class="error">{{ error}}</div>
-            {% endfor %}
-				{% endif %}	
-					<div style="clear:both;"></div>								
-				<i class="icon-user  "></i>
-					<input  class="col-8 col-md-6" type="text" placeholder="powtórz login" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz login'"  name="newusername2" required>
-					<br/>
-					<input type="submit" value="Zmień login">
+			<div style="clear:both;"></div>					
+			<i class="icon-user  "></i>
+			<input  class="col-8 col-md-6" type="text" placeholder="nowy login" onfocus="this.placeholder=''" onblur="this.placeholder='nowy login'"  name="newusername" required>
+  			{% if user.errors_newlogin is not empty %}
+				{% for error in user.errors_newlogin %}
+					<div class="error">{{ error}}</div>
+				{% endfor %}
+			{% endif %}	
+			<div style="clear:both;"></div>								
+			<i class="icon-user  "></i>
+			<input  class="col-8 col-md-6" type="text" placeholder="powtórz login" onfocus="this.placeholder=''" onblur="this.placeholder='powtórz login'"  name="newusername2" required>
+			<br/>
+			<input type="submit" value="Zmień login">
 	
 					
-				</form>
-			</div>
-
-
-		
-		{% endblock %}
+		</form>
+	</div>
+{% endblock %}
