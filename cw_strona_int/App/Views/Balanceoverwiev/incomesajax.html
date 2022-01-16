@@ -1,0 +1,25 @@
+
+					<div id='incomeTable' class='col-12 col-xl-6'> Przychody<br/> 
+						<table>
+							<thead>
+								<tr><th colspan="3">Łącznie rekordów:  {% if sum_incomes is not empty %} {% for sum_income in sum_incomes %} {{sum_income['COUNT(incomes.id)']}}        {% endfor %}   {% endif %}</th></tr>
+								<tr><th>data</th><th>kwota</th><th>typ</th></tr>
+							</thead>
+							<tbody>
+								{% if list_incomes is not empty %}
+									{% for list_income in list_incomes  %}
+										<tr><td>{{list_income.date_of_income}}</td><td>{{list_income.Amount}}</td><td>{{list_income.name}}</td</tr>
+									{% endfor %}
+								{% endif %}
+							</tbody>
+  
+						</table>
+						<br/>
+						<p class='inc'>Przychody = 	
+						{{sum_incomes [0] ['SUM(incomes.Amount)']}}
+						{% if sum_incomes [0] ['SUM(incomes.Amount)'] is empty %}
+						0.00
+						{% endif %}
+						</p> 
+					</div>
+					

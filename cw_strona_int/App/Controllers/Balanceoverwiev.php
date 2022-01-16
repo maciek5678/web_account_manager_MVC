@@ -62,7 +62,6 @@ class Balanceoverwiev extends \Core\Controller
 				$selectedCurrentYear= $user->currentYearPeriod($_POST['period']);
 				$arg= $expenses->showCharDraft($_SESSION['user_id'], $data);
 				$below0= $user->below0($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);	 
-					 
 				View::renderTemplate('Balanceoverwiev/new.html',[
 				'list_incomes' => $list_incomes,
 				'list_expenses' => $list_expenses,
@@ -74,6 +73,7 @@ class Balanceoverwiev extends \Core\Controller
 				'below0' => $below0,
 				'arg' => $arg
 				]);
+				
 
 			}
 			else
@@ -117,4 +117,5 @@ class Balanceoverwiev extends \Core\Controller
 		
 		}
 	}
+
 }

@@ -1,13 +1,47 @@
 {% extends "base2.html" %}
 {% block menu2  %} class="nav-link disabled"
 {% endblock %}
+
+{% block script %}
+	
+	function showWarning (event)
+	{ 
+		var money=$("#amount").val();
+		var type=$(".incType:checked").val();
+		var date=$("#data").val();
+			
+		{% if dataIncomes is not empty %}
+			{% for dataIncome in dataIncomes %}
+				if (type=="{{ dataIncome.name}}" )
+				{
+					var limit="{{ dataIncome.amount_limit}}";
+					{# break #}
+				}
+			{% endfor %}
+		{% endif %}
+		$.post("/Addincome/verify",  {
+			data:date,
+			kwota:money,
+			category:type,
+			limit:limit
+		}, function(data, status){
+			$("#controlPanel").html(data);
+		});
+	};
+			
+	$("#amount").change(showWarning );
+	$(".incType").change(showWarning );
+
+{% endblock %}
+
 {% block body %}
 
 	<div id="subtitle">
 		Dodaj przychód
 	</div>
 		<div id="expence" class="col-8 col-xl-6">
-			<form method="post" action="/addincome/add">				
+			<form method="post" action="/addincome/add" id="saveForm">		
+	<div id="controlPanel" class="col-12"> </div>			
 			<div class="cattitle col-12">Data</div>
 			<br/>    
 			<input type="date" id="data" name="data"><br/>
@@ -21,7 +55,7 @@
 			<div class="cattitle col-12">Kwota</div>
 			<br/>
 			<div class ="cat col-12 ">
-				<input id="amount" type="number"   name="kwota" min="0.01" step="0.01"/>
+				<input id="amount" type="number"   name="kwota" min="0.01" step="0.01" />
 				{% if incomes.errors_kwota is not empty %}
 					{% for error in incomes.errors_kwota %}
 					<div class="error">{{ error}}</div>
@@ -34,12 +68,17 @@
 			<div class="cattitle">Kategoria</div>
 				<br/>
 				<div class ="cat col-12 ">
-					<label><input type="radio" name="przychod" value="Wynagrodzenie" checked />Wynagrodzenie</label><br/>
-					<label><input type="radio" name="przychod" value="Odsetki bankowe"/>Odsetki bankowe</label>		<br/>
-					<label><input type="radio" name="przychod" value="Sprzedaż na allegro"/>Sprzedaż na allegro</label>	<br/>
-					<label><input type="radio" name="przychod" id="Other" value="Inne"/>Inne</label> 
-				</div>				
-				<div style ="clear:both;"></div>
+					{% if dataIncomes is not empty %}
+						{% for dataIncome in dataIncomes %}
+							<label class="col-12">	
+								<div class="incomelimit col-12"><div class="incomelimittitle"><input type="radio" name="przychod" value="{{ dataIncome.name}}"  class="incType" checked />{{ dataIncome.name}}</div> 
+									<div style="clear:both;"></div>
+									<div class="incomeLimitAmount text-danger" id="limit{{ dataIncome.id}}">{% if dataIncome.amount_limit is not empty %}Limit: {{ dataIncome.amount_limit}}{% endif %}</div>
+								</div>
+							</label>
+						{% endfor %}
+					{% endif %}
+				</div>					
 				<br/>
 				<div class="cattitle col-12">Komentarz</div>
 				<br/>
@@ -53,7 +92,7 @@
 						
 						
 				<span class ="add">
-					<input type="submit"  value="Dodaj"/>	
+					<input type="submit" value="Dodaj"  id="send" />	
 				</span>
 				<span class ="abort">
 					<input type="submit" value="Anuluj" />		
@@ -62,4 +101,6 @@
 				</div>						
 			</form>
 	</div>
+
+	
 {% endblock %}

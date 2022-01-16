@@ -214,7 +214,117 @@ class Expenses extends \Core\Model
 
     }			   
 					   
-					   
+	public function takeExpensesCategoriesAndLimit($id)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("SELECT name, amount_limit, id   FROM expenses_category_assigned_to_users WHERE user_id=:id ");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+	}			 
+
+
+	public function insertExpenseCategoryAssignedToUser($id)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("INSERT INTO  expenses_category_assigned_to_users (id, user_id, name, amount_limit) VALUES (NULL,:id,  :name, :limit) ");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+		$usersQuery->bindValue(':name', $this->categoryname, PDO::PARAM_STR);
+		
+		if(!empty($this->limitNew)){
+			$usersQuery->bindValue(':limit', $this->limitNew, PDO::PARAM_STR);
+		
+		}
+		else
+		{
+			$usersQuery->bindValue(':limit', NULL, PDO::PARAM_INT);
+		}
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+	}
+	
+	
+	public function updateExpenseCategoryAssignedToUserLimit($id, $salaryLimit, $catName)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("UPDATE expenses_category_assigned_to_users SET amount_limit=:amount_limit WHERE user_id=:id AND name=:name");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+		$usersQuery->bindValue(':name', $catName, PDO::PARAM_STR);		
+		$usersQuery->bindValue(':amount_limit', $salaryLimit, PDO::PARAM_STR);
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
+	public function deleteExpenseCategoryAssignedToUserLimit($id, $catName)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("UPDATE expenses_category_assigned_to_users SET amount_limit=:amount_limit WHERE user_id=:id AND name=:name");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+		$usersQuery->bindValue(':name', $catName, PDO::PARAM_STR);		
+		$usersQuery->bindValue(':amount_limit', NULL, PDO::PARAM_STR);
+		$usersQuery->execute();
+	return	$users = $usersQuery-> fetchAll();
+
+	}
+	
+	public function deleteExpenseCategoryAssignedToUser ($userId, $catId)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("DELETE FROM expenses_category_assigned_to_users  WHERE user_id=:id AND id=:catId");
+		$usersQuery->bindValue(':id', $userId, PDO::PARAM_INT);
+		$usersQuery->bindValue(':catId', $catId, PDO::PARAM_INT);		
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
+	
+	public function deleteExpenses($userId, $catId)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("DELETE FROM expenses  WHERE user_id=:id AND expense_category_assigned_to_user_id=:catId");
+		$usersQuery->bindValue(':id', $userId, PDO::PARAM_INT);
+		$usersQuery->bindValue(':catId', $catId, PDO::PARAM_INT);		
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
+	
+	public function getData($data)
+	{
+		$data=substr($data, 0, -3);
+		return	$data."%";
+	}
+	
+	public function getExpensesByCategoryAndUserAndDate($data, $category)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("SELECT SUM(expenses.amount),  expenses_category_assigned_to_users.amount_limit FROM expenses, expenses_category_assigned_to_users WHERE expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND name=:category AND expenses.date_of_expense LIKE :data");
+		$usersQuery->bindValue(':category', $category, PDO::PARAM_STR);		
+		$usersQuery->bindValue(':data', $data, PDO::PARAM_STR);		
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
+	public function sumExpensesAndCurrentIncome($sum,$kwota)
+	{
+		return $sum + $kwota;
+	}
+	
+	public function difference($limit,$kwota)
+	{
+		return $limit - $kwota;
+	}
+	
+	public function color($limit,$sum)
+	{
+		if(( $limit - $sum)<0)	
+		return "orange";
+		else
+		return "green";
+		
+	}
+	
 }
 				   
 

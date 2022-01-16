@@ -515,3 +515,77 @@ p
 	font-size:20px;
 	font-weight:bold;
 }
+
+.incomelimit
+{
+	padding:2px;
+			color:#828282;
+			border-style: solid;
+				border-radius: 8px;
+			float:left;
+			margin:5px;
+				
+}
+.incomelimit:hover
+{
+	background-color:#0EFF1E;
+	
+}
+.icon-inc
+{
+
+	padding:8px;
+margin-left:auto;
+float:right;
+}
+
+.icon-inc:hover
+{
+	background-color:#ffffff;
+}
+
+.incomelimittitle
+{
+	float:left;
+	padding:5px;
+	font-size:13px;
+	font-weight:bold;
+}
+
+.incomeLimitAmount
+{
+	font-size:10px;
+	font-weight:bold;
+}
+
+#difference
+{
+
+	border-radius:5px;
+	
+	display:block;
+	text-align:center;
+	display: inline-block;
+	
+}
+
+.limitProperties
+{
+	float:left;
+	
+		padding:10px;
+		text-align:center;
+		font-size:11px;
+}
+.limitPropertiesCat
+{
+	text-align:center;
+	font-weight:bold;
+	
+}
+
+#controlPanel
+{
+	display: inline-block;
+	
+}

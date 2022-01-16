@@ -1,0 +1,113 @@
+{% extends "base2.html" %}
+
+{% block script %}
+
+	$("#saveNewCategory").click(function(event) {
+
+		var name=$("#catname").val()
+		name=name.toUpperCase();
+		{% if dataPayments is not empty %}
+			{% for dataPayment in dataPayments %}
+				var dataName="{{ dataPayment.name}}";					
+				dataName=dataName.toUpperCase();	
+				if(name===dataName)	{
+
+					event.preventDefault();
+					alert("Metoda już istnieje");
+				}		
+					
+			
+
+				{# break #}
+			{% endfor %}
+		{% endif %}
+		else if (name===""){
+			alert("Wpisz nazwę");
+			event.preventDefault();
+		}
+
+	});
+
+	$("#limitChecked").click(function(event) {	
+			
+		if($('#newLimitAmount').prop('disabled')){
+			$('#newLimitAmount').removeAttr("disabled");
+		}
+		else{
+			$('#newLimitAmount').attr("disabled", true)
+		}				
+	});
+
+{% endblock %}
+
+{% block body %}
+
+
+
+			<div id="subtitle">
+			Kategorie płatności
+			</div>
+	<div id="expence" class="col-8  col-md-6 col-lg-4 col-xl-3">
+		<div class ="cat col-12 ">
+			{% if dataPayments is not empty %}
+				{% for dataPayment in dataPayments %}
+					<div class="incomelimit col-12"><div class="incomelimittitle">{{ dataPayment.name}}</div> </div>
+					<div style="clear:both;"></div>
+				{% endfor %}
+			{% endif %}
+			<span class ="add">
+				<input type="submit" value="Dodaj kategorię" id="addCat" data-bs-toggle="modal" data-bs-target="#newModal" />	
+			</span>
+			<form method="post" action="/Paymentcategory/add" id="saveForm">		
+				<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Podaj dane kategorii</h5>
+								
+
+						  </div>
+							<div class="modal-body">
+							  Nazwa kategorii<br/>
+							  <input type="text" name="categoryname"  id="catname" /> 
+							  <br/><br/>
+							</div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+							<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="saveNewCategory">Zapisz</button>
+						  </div>
+						</div>
+					 </div>
+				</div>	
+			</form>
+			<span class ="abort">
+				<input type="submit" value="Usuń kategorię"  id="deleteCat" data-bs-toggle="modal" data-bs-target="#deleteModal"/>		
+			</span>			
+
+			<form method="post" action="/Paymentcategory/deletemethod" id="saveForm">
+				<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Wybierz kategorie do usunięcia</h5>
+							
+
+							</div>
+							<div class="modal-body">
+								{% if dataPayments is not empty %}
+									{% for dataPayment in dataPayments %}
+									<label>	  <input type="radio" name="limit"  value="{{ dataPayment.id}}" id="limitChecked" />  {{ dataPayment.name}} </label>	<br/>
+									{% endfor %}
+								{% endif %}
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+									<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="deleteCategory">Usuń</button>
+								</div>
+							</div>
+						</div>
+					</div>	
+				</div>
+			</form>
+		</div>
+			</div>
+{% endblock %}

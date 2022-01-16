@@ -2,6 +2,7 @@
 {% block menu4  %} class="nav-link disabled"
 {% endblock %}
 {% block body  %}
+<div id="ajaxMain">
 	<div id="subtitle">
 		Przeglądaj bilans
 	</div>
@@ -9,7 +10,7 @@
 		<div id="bilancePeriod">
 							
 			<label for="period">Podaj okres bilansu:</label>
-			<select  id="period"  onchange="changeDate(this);if(this.selectedIndex>=0&&this.selectedIndex<3) submit();"  name="period" >
+			<select  id="period"   name="period"  >
 				<option value="currentMonth" {% if selectedCurrentMonth is not empty %} selected {% endif %}>Bieżący miesiąc</option>
 				<option value="previousMonth" {% if selectedPreviousMonth is not empty %} selected {% endif %} >Poprzedni miesiąc</option>
 				<option value="currentYear"  {% if selectedCurrentYear is not empty %} selected  {% endif %} >Bieżący rok</option>
@@ -109,4 +110,5 @@
 		}
 	</script>
 	<script src="js/bootstrap.js"></script>
+	</div>
 {% endblock  %}

@@ -5,6 +5,7 @@ namespace App\Controllers;
 use \Core\View;
 use \App\Auth;
 use \App\Models\Expenses;
+use \App\Models\User;
 /**
  * Home controller
  *
@@ -17,8 +18,16 @@ class Addexpense extends \Core\Controller
     {
 		if(Auth::isloggedin())
 		{
-			View::renderTemplate('Addexpense/new.html');
-		} else{
+			$payments= new User();
+			$expenses = new Expenses();
+			$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
+			$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
+			View::renderTemplate('Addexpense/new.html',[
+			'dataPayments' => $dataPayments,
+			'dataExpenses' => $dataExpenses
+			]);
+		} else
+		{
             $this->redirect('/');
 	
 		}
@@ -32,14 +41,27 @@ class Addexpense extends \Core\Controller
 			if($expenses->save($_SESSION['user_id']))
 			{
 
-				View::renderTemplate('Addexpense/new.html');
+				$payments= new User();
+				
+				$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
+				$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
+				View::renderTemplate('Addexpense/new.html',[
+				'dataPayments' => $dataPayments,
+				'dataExpenses' => $dataExpenses
+				]);
 			}
-			else{
+			else
+			{
+				$payments= new User();
+				$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
+				$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
 				View::renderTemplate('Addexpense/new.html', [
-				'expenses' => $expenses
+				'expenses' => $expenses,
+				'dataPayments' => $dataPayments,
+				'dataExpenses' => $dataExpenses
 				]);
 	
-				}
+			}
 		} 
 		else
 		{
@@ -47,4 +69,48 @@ class Addexpense extends \Core\Controller
 	
 		}
     }
+	
+	public function verifyAction()
+	{
+		$expenses = new Expenses();
+		$data=$expenses->getData($_POST['data']);
+		$sum_expenses=$expenses->getExpensesByCategoryAndUserAndDate($data, $_POST['category']);
+	
+		if(!empty( $_POST['limit']))
+		{
+			if(!empty( $sum_expenses [0] ['SUM(expenses.amount)']))
+			{
+				$difference= $expenses->difference($_POST['limit'], $sum_expenses [0] ['SUM(expenses.amount)'] );
+				$sum_balance= $expenses->sumExpensesAndCurrentIncome($sum_expenses [0] ['SUM(expenses.amount)'],$_POST['kwota'] );
+				$color=$expenses->color($_POST['limit'],$sum_balance);
+		
+				View::renderTemplate('Addexpense/change.html', [
+				'limit' => $_POST['limit'],
+				'spended' => $sum_expenses [0] ['SUM(expenses.amount)'],
+				'diff' => $difference,
+				'sum' => $sum_balance,
+				'color' => $color
+				]);
+			} 
+	
+			else
+
+			{
+	
+				$color=$expenses->color($_POST['limit'],$_POST['kwota']);
+				View::renderTemplate('Addexpense/change.html', [
+				'limit' => $_POST['limit'],
+				'spended' => '0,00',
+				'diff' => $_POST['limit'],
+				'sum' => $_POST['kwota'],
+				'color' => $color
+				]);	
+			}		
+
+
+	}
+
+	
+	}
+	
 }

@@ -1,0 +1,170 @@
+{% extends "base2.html" %}
+{% block script %}
+	{% if dataExpenses is not empty %}
+		{% for dataExpense in dataExpenses %}
+				
+				
+			$("#saveExpense{{ dataExpense.id}}Limit").click(function(event) {
+				var salaryLimit= $('#expense{{ dataExpense.id}}LimitAmount').val();
+				if (salaryLimit !=="")
+					$("#limit{{ dataExpense.id}}").html("Limit: " +salaryLimit );
+				var catName= "{{ dataExpense.name}}"
+				$.post("/Expensecategory/save", {
+					salaryLimit: salaryLimit,
+					catName: catName
+				}, function(data, status){
+				});
+			});
+
+			$("#deleteExpense{{ dataExpense.id}}Limit").click(function(event) {
+				$("#limit{{ dataExpense.id}}").html("" );
+				var catName= "{{ dataExpense.name}}"
+				$.post("/Expensecategory/delete",  {
+					catName: catName
+				}, function(data, status){
+				});
+
+			});
+		{% endfor %}
+	{% endif %}
+			
+	$("#saveNewCategory").click(function(event) {
+
+		var name=$("#catname").val()
+		name=name.toUpperCase();
+		{% if dataExpenses is not empty %}
+			{% for dataExpense in dataExpenses %}
+				var dataName="{{ dataExpense.name}}";
+				dataName=dataName.toUpperCase();
+				if(name===dataName)	{
+					event.preventDefault();
+					alert("Metoda już istnieje");
+				}		
+				{# break #}
+			{% endfor %}
+		{% endif %}
+		else if (name===""){
+			alert("Wpisz nazwę");
+			event.preventDefault();
+		}
+
+	});
+
+
+	$("#limitChecked").click(function(event) {	
+		
+		if($('#newLimitAmount').prop('disabled')){
+			$('#newLimitAmount').removeAttr("disabled");
+		}
+		else{
+			$('#newLimitAmount').attr("disabled", true)
+		}			
+	});
+{% endblock %}
+
+{% block body %}
+	<div id="subtitle">
+		Kategorie wydatków
+	</div>
+	<div id="expence" class="col-8  col-md-6 col-lg-4 col-xl-3">
+		<div class ="cat col-12 ">
+			{% if dataExpenses is not empty %}
+				{% for dataExpense in dataExpenses %}
+					<div class="incomelimit col-12">
+					<div class="incomelimittitle">{{ dataExpense.name}}</div> 
+					<div class=" icon-inc" id="deleteExpense{{ dataExpense.id}}Limit">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" >
+							<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+							<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+						</svg>
+						</div>
+							<div class=" icon-inc" data-bs-toggle="modal" data-bs-target="#expenses{{ dataExpense.id}}Modal"> <i class="icon-wrench" ></i></div>
+							<div style="clear:both;"></div>
+							<div class="incomeLimitAmount text-danger" id="limit{{ dataExpense.id}}">{% if dataExpense.amount_limit is not empty %}Limit: {{ dataExpense.amount_limit}}{% endif %}</div>
+						</div> 					
+						<div class="modal fade" id="expenses{{ dataExpense.id}}Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+							<div class="modal-content">
+							  <div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Ustaw limit: {{ dataExpense.name}} </h5>
+									
+							  </div>
+							  <div class="modal-body">
+								<input  class="col-8 col-md-6" type="number" min="0.01" step="0.01" placeholder="wpisz kwotę" onfocus="this.placeholder=''" onblur="this.placeholder='wpisz kwotę'"  name="limitexpense{{ dataExpense.id}}"  id="expense{{ dataExpense.id}}LimitAmount" required>
+							  </div>
+							  <div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+								<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveExpense{{ dataExpense.id}}Limit">Zapisz</button>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					
+					
+					
+				{% endfor %}
+			{% endif %}
+					
+					</div>			
+					<div style="clear:both;"></div>	
+			
+					<span class ="add">
+						<input type="submit" value="Dodaj kategorię" id="addCat" data-bs-toggle="modal" data-bs-target="#newModal" />	
+					</span>
+					<form method="post" action="/Expensecategory/add" id="saveForm">		
+						<div class="modal fade" id="newModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+								  <div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Podaj dane kategorii</h5>
+										
+
+								  </div>
+								<div class="modal-body">
+									Nazwa kategorii<br/>
+									<input type="text" name="categoryname"  id="catname" /> 
+									<br/><br/>
+									<label>
+										<input type="checkbox" name="limit"  id="limitChecked" /> Włącz limit
+									</label><br/> 
+									<input  class="col-8 col-md-6" type="number" min="0.01" step="0.01" placeholder="wpisz kwotę" onfocus="this.placeholder=''" onblur="this.placeholder='wpisz kwotę'"  name="limitNew"  id="newLimitAmount" disabled>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+									<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="saveNewCategory">Zapisz</button>
+								</div>
+								</div>
+							</div>
+						</div>	
+					</form>
+					<span class ="abort">
+						<input type="submit" value="Usuń kategorię"  id="deleteCat" data-bs-toggle="modal" data-bs-target="#deleteModal"/>		
+					</span>			
+
+					<form method="post" action="/Expensecategory/deletecategory" id="saveForm">
+
+						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Wybierz kategorie do usunięcia</h5>
+									</div>
+									<div class="modal-body">
+										{% if dataExpenses is not empty %}
+											{% for dataExpense in dataExpenses %}
+											 <label> 
+												<input type="radio" name="limit"  value="{{ dataExpense.id}}" id="limitChecked" />  {{ dataExpense.name}} 
+											 </label><br/>
+											{% endfor %}
+										{% endif %}
+									  <div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+										<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="deleteCategory">Usuń</button>
+									  </div>
+									</div>
+								</div>
+							</div>	
+						
+						</div>
+					</form>
+{% endblock %}

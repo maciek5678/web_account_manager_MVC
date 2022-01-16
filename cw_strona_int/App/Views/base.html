@@ -13,6 +13,29 @@
 		<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">	
 		<link rel="stylesheet" href="/css/fontello.css"/>		
 		<link rel="stylesheet" href="/css/bootstrap.css"/>		
+				<script
+		src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+		crossorigin="anonymous"></script>
+		<script>
+			$(document).ready(function() {
+				$("#rejestracja").click(function(event) {
+			event.preventDefault();
+					
+
+					$("body").load("/Registration/new");
+
+				});
+								$("#logowanie").click(function() {
+			event.preventDefault();
+					
+
+					$("body").load("/");
+
+				});
+				
+			});
+		</script>
 	</head>	
 		<body>
 			<div id="container" class="col-12">
@@ -25,12 +48,12 @@
 				<div id="menu">  
 					<div id="menuoption">  
 						<ul>
-							<li>
-								<a 	href="/registration/new">
+							<li id="rejestracja">
+								<a href="/Registration/new">
 								Rejestracja
 								</a>
 							</li>
-							<li>
+							<li id="logowanie">
 								<a href="/">
 								Logowanie
 								</a>
@@ -39,15 +62,20 @@
 						<div style="clear:both;"></div>
 					</div>
 				</div>
+				
+				<span id="regjs">
 				{% block body %}
 				{% endblock %}
+				</span>
 			</div>
 			
 			<script src="/js/bootstrap.js"></script>
 		    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 			<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-			
+
 			{% block footer %}
 			{% endblock %}
+
+			
 		</body>
 </html>	

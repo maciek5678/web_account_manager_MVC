@@ -458,6 +458,49 @@ public function changeemail()
 			return  $id = $row['email'];
 		}
 	}
+	
+	public function takePaymentsCategories($id)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("SELECT name, id   FROM payment_methods_assigned_to_users WHERE user_id=:id ");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+	}
+
+	public function insertPaymentCategoryAssignedToUser($id)
+	{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("INSERT INTO  payment_methods_assigned_to_users  (id, user_id, name) VALUES (NULL, :id,  :name) ");
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
+		$usersQuery->bindValue(':name', $this->categoryname, PDO::PARAM_STR);
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+	}
+	
+	
+		public function deletePaymentCategoryAssignedToUser ($userId, $catId)
+		{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("DELETE FROM payment_methods_assigned_to_users   WHERE user_id=:id AND id=:catId");
+		$usersQuery->bindValue(':id', $userId, PDO::PARAM_INT);
+		$usersQuery->bindValue(':catId', $catId, PDO::PARAM_INT);		
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
+	
+		public function deleteExpenses($userId, $catId)
+		{
+		$db = static::getDB();
+		$usersQuery = $db->prepare("DELETE FROM expenses  WHERE user_id=:id AND payment_method_assigned_to_user_id=:catId");
+		$usersQuery->bindValue(':id', $userId, PDO::PARAM_INT);
+		$usersQuery->bindValue(':catId', $catId, PDO::PARAM_INT);		
+		$usersQuery->execute();
+		return	$users = $usersQuery-> fetchAll();
+
+	}
 }	
 
 	
