@@ -77,7 +77,7 @@ class Incomes extends \Core\Model
 	public function takeIncomesTable($id,$data)
 	{
 		$db = static::getDB();
-		$usersQuery = $db->prepare("SELECT  incomes.date_of_income, incomes.Amount, incomes_category_assigned_to_users.name, incomes_category_assigned_to_users.amount_limit FROM incomes_category_assigned_to_users, incomes WHERE incomes_category_assigned_to_users.id=incomes.income_category_assigned_to_user_id AND incomes.user_id=:id AND incomes.date_of_income LIKE :data");
+		$usersQuery = $db->prepare("SELECT  incomes.date_of_income, incomes.Amount, incomes_category_assigned_to_users.name FROM incomes_category_assigned_to_users, incomes WHERE incomes_category_assigned_to_users.id=incomes.income_category_assigned_to_user_id AND incomes.user_id=:id AND incomes.date_of_income LIKE :data");
 		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
 		$usersQuery->bindValue(':data', $data, PDO::PARAM_STR);
 		$usersQuery->execute();
@@ -119,10 +119,10 @@ class Incomes extends \Core\Model
 		return	$users = $usersQuery-> fetchAll();
 	}
 	
-	public function takeIncomesCategoriesAndLimit($id)
+	public function takeIncomesCategories($id)
 	{
 		$db = static::getDB();
-		$usersQuery = $db->prepare("SELECT name, amount_limit, id   FROM incomes_category_assigned_to_users WHERE user_id=:id ");
+		$usersQuery = $db->prepare("SELECT name,  id   FROM incomes_category_assigned_to_users WHERE user_id=:id ");
 		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
 
 		$usersQuery->execute();
@@ -133,45 +133,16 @@ class Incomes extends \Core\Model
 	public function insertIncomeCategoryAssignedToUser($id)
 	{
 		$db = static::getDB();
-		$usersQuery = $db->prepare("INSERT INTO  incomes_category_assigned_to_users (id, user_id, name, amount_limit) VALUES (NULL,:id,  :name, :limit) ");
+		$usersQuery = $db->prepare("INSERT INTO  incomes_category_assigned_to_users (id, user_id, name) VALUES (NULL,:id,  :name) ");
 		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
 		$usersQuery->bindValue(':name', $this->categoryname, PDO::PARAM_STR);
-		
-		if(!empty($this->limitNew)){
-			$usersQuery->bindValue(':limit', $this->limitNew, PDO::PARAM_STR);
-		
-		}
-		else
-		{
-			$usersQuery->bindValue(':limit', NULL, PDO::PARAM_INT);
-		}
 		$usersQuery->execute();
 		return	$users = $usersQuery-> fetchAll();
 	}
 	
 	
-			public function updateIncomeCategoryAssignedToUserLimit($id, $salaryLimit, $catName)
-	{
-		$db = static::getDB();
-		$usersQuery = $db->prepare("UPDATE incomes_category_assigned_to_users SET amount_limit=:amount_limit WHERE user_id=:id AND name=:name");
-		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
-		$usersQuery->bindValue(':name', $catName, PDO::PARAM_STR);		
-		$usersQuery->bindValue(':amount_limit', $salaryLimit, PDO::PARAM_STR);
-		$usersQuery->execute();
-		return	$users = $usersQuery-> fetchAll();
 
-	}
-	public function deleteIncomeCategoryAssignedToUserLimit($id, $catName)
-	{
-		$db = static::getDB();
-		$usersQuery = $db->prepare("UPDATE incomes_category_assigned_to_users SET amount_limit=:amount_limit WHERE user_id=:id AND name=:name");
-		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
-		$usersQuery->bindValue(':name', $catName, PDO::PARAM_STR);		
-		$usersQuery->bindValue(':amount_limit', NULL, PDO::PARAM_STR);
-		$usersQuery->execute();
-		return	$users = $usersQuery-> fetchAll();
 
-	}
 	
 	public function deleteIncomeCategoryAssignedToUser ($userId, $catId)
 	{
@@ -195,43 +166,7 @@ class Incomes extends \Core\Model
 
 	}
 	
-	public function getData($data)
-	{
-		$data=substr($data, 0, -3);
-		return	$data."%";
 
-	}
-	
-	public function getIncomesByCategoryAndUserAndDate($data, $category)
-	{
-		$db = static::getDB();
-		$usersQuery = $db->prepare("SELECT SUM(incomes.amount),  incomes_category_assigned_to_users.amount_limit FROM incomes, incomes_category_assigned_to_users WHERE incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND name=:category AND incomes.date_of_income LIKE :data");
-		$usersQuery->bindValue(':category', $category, PDO::PARAM_STR);		
-		$usersQuery->bindValue(':data', $data, PDO::PARAM_STR);		
-		$usersQuery->execute();
-		return	$users = $usersQuery-> fetchAll();
-
-	}
-	
-	public function sumIncomesAndCurrentIncome($sum,$kwota)
-	{
-		return $sum + $kwota;
-	}
-	
-	public function difference($limit,$kwota)
-	{
-		return $limit - $kwota;
-	}
-	
-	public function color($limit,$sum)
-	{
-		if(( $limit - $sum)<0)
-			
-		return "orange";
-		else
-			return "green";
-		
-	}
 	
 	
 }

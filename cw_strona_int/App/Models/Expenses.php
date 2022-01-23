@@ -296,12 +296,13 @@ class Expenses extends \Core\Model
 		return	$data."%";
 	}
 	
-	public function getExpensesByCategoryAndUserAndDate($data, $category)
+	public function getExpensesByCategoryAndUserAndDate($data, $category, $id)
 	{
 		$db = static::getDB();
-		$usersQuery = $db->prepare("SELECT SUM(expenses.amount),  expenses_category_assigned_to_users.amount_limit FROM expenses, expenses_category_assigned_to_users WHERE expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND name=:category AND expenses.date_of_expense LIKE :data");
+		$usersQuery = $db->prepare("SELECT SUM(expenses.amount),  expenses_category_assigned_to_users.amount_limit FROM expenses, expenses_category_assigned_to_users WHERE expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND name=:category AND expenses.date_of_expense LIKE :data AND expenses.user_id=:id");
 		$usersQuery->bindValue(':category', $category, PDO::PARAM_STR);		
-		$usersQuery->bindValue(':data', $data, PDO::PARAM_STR);		
+		$usersQuery->bindValue(':data', $data, PDO::PARAM_STR);
+		$usersQuery->bindValue(':id', $id, PDO::PARAM_INT);
 		$usersQuery->execute();
 		return	$users = $usersQuery-> fetchAll();
 
@@ -324,6 +325,7 @@ class Expenses extends \Core\Model
 		return "green";
 		
 	}
+	
 	
 }
 				   

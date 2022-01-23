@@ -589,3 +589,46 @@ float:right;
 	display: inline-block;
 	
 }
+
+.flash_alert {
+    border: 1px solid #ccc;
+
+}
+.alert-info {
+    background-color: #d9edf7;
+}
+.alert-success {
+    background-color: #dff0d8;
+}
+.alert-warning {
+    background-color: #fcf8e3;
+}
+
+.incomelimitNew
+{
+	padding:2px;
+			color:#828282;
+			border-style: solid;
+				border-radius: 8px;
+			float:left;
+			margin:5px;
+				
+}
+
+input[type=button] 
+{
+
+	
+	background-color:#de0c0d;
+	font-size:20px;
+	color:white;
+	padding: 15px 10px;
+	margin-top:10px;
+	border:none;
+	border-radius:5px;
+	cursor:pointer;
+	letter-spacing:2px;
+	outline:none;
+	margin-bottom:20px;
+	
+}

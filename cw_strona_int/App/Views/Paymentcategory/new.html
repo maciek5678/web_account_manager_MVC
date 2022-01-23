@@ -28,16 +28,6 @@
 
 	});
 
-	$("#limitChecked").click(function(event) {	
-			
-		if($('#newLimitAmount').prop('disabled')){
-			$('#newLimitAmount').removeAttr("disabled");
-		}
-		else{
-			$('#newLimitAmount').attr("disabled", true)
-		}				
-	});
-
 {% endblock %}
 
 {% block body %}
@@ -51,7 +41,7 @@
 		<div class ="cat col-12 ">
 			{% if dataPayments is not empty %}
 				{% for dataPayment in dataPayments %}
-					<div class="incomelimit col-12"><div class="incomelimittitle">{{ dataPayment.name}}</div> </div>
+					<div class="incomelimitNew  col-12"><div class="incomelimittitle">{{ dataPayment.name}}</div> </div>
 					<div style="clear:both;"></div>
 				{% endfor %}
 			{% endif %}
@@ -101,12 +91,34 @@
 								{% endif %}
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
-									<button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="deleteCategory">Usuń</button>
+									<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="deleteCategory" data-bs-target="#newConfirmModal" data-bs-toggle="modal" >Usuń</button>
 								</div>
 							</div>
 						</div>
 					</div>	
 				</div>
+				
+				
+								<div class="modal fade" id="newConfirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Czy jesteś pewien</h5>
+							
+
+							</div>
+							<div class="modal-body">
+							
+							Czy jesteś pewien, usunięcie tej kategorii spowoduje usunięcie wszystkich wpływów o tym sposobie płatności
+							
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anuluj</button>
+								<button type="submit" class="btn btn-primary" id="saveNewCategory">Potwierdź</button>
+							</div>
+						</div>
+					</div>
+				</div>	
 			</form>
 		</div>
 			</div>

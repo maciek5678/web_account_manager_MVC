@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use \Core\View;
 use \App\Auth;
+use \App\Flash;
 use \App\Models\Expenses;
 use \App\Models\User;
 /**
@@ -22,6 +23,7 @@ class Addexpense extends \Core\Controller
 			$expenses = new Expenses();
 			$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
 			$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
+			
 			View::renderTemplate('Addexpense/new.html',[
 			'dataPayments' => $dataPayments,
 			'dataExpenses' => $dataExpenses
@@ -45,6 +47,8 @@ class Addexpense extends \Core\Controller
 				
 				$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
 				$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
+				Flash::addMessage('Dodanie zakończone pomyślnie');
+				
 				View::renderTemplate('Addexpense/new.html',[
 				'dataPayments' => $dataPayments,
 				'dataExpenses' => $dataExpenses
@@ -55,6 +59,7 @@ class Addexpense extends \Core\Controller
 				$payments= new User();
 				$dataPayments= $payments ->takePaymentsCategories($_SESSION['user_id']);
 				$dataExpenses= $expenses ->takeExpensesCategoriesAndLimit($_SESSION['user_id']);
+				Flash::addMessage('Wystąpił błąd', Flash::WARNING);
 				View::renderTemplate('Addexpense/new.html', [
 				'expenses' => $expenses,
 				'dataPayments' => $dataPayments,
@@ -74,7 +79,7 @@ class Addexpense extends \Core\Controller
 	{
 		$expenses = new Expenses();
 		$data=$expenses->getData($_POST['data']);
-		$sum_expenses=$expenses->getExpensesByCategoryAndUserAndDate($data, $_POST['category']);
+		$sum_expenses=$expenses->getExpensesByCategoryAndUserAndDate($data, $_POST['category'], $_SESSION['user_id']);
 	
 		if(!empty( $_POST['limit']))
 		{

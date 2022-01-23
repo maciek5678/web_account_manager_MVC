@@ -296,9 +296,14 @@ class User extends \Core\Model
 		{
 			return 'Uważaj. Wpadasz w długi';
 		}
-		
-		
 	}
+		
+	public function balanceStatus($sum_incomes, $sum_expenses)
+	{
+		return $sum_incomes - $sum_expenses;
+	}
+		
+	
 
 	public function changelogin()
 	{		

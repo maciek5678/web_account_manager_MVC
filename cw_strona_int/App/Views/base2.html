@@ -38,6 +38,11 @@ $(document).ready(function() {
 
 	<body onload="pobierzDate();" >
 		<div id="container" class="col-12">
+			{% for message in flash_messages %}
+				<div class="flash_alert alert-{{ message. type}}">
+					{{ message.body }}
+				</div>
+			{% endfor %}		
 			<div id="title">
 				<img  id="dollar" src="/img/dolar.png" alt="dolar"/>O$zczedzaj pieniądze
 				<div class="quote">

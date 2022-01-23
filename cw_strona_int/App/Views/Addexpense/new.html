@@ -42,6 +42,21 @@
 	};
 	$("#cash").change(showWarning);
 	$(".expType").change(showWarning);
+	$("#data").change(showWarning );
+	
+	$(".add").click(function(event){
+
+
+
+
+if($("#cash").val()==="")
+{
+
+event.preventDefault();
+alert("Wpisz kwotę");
+
+}
+});
 
 {% endblock %}
 	
@@ -56,7 +71,7 @@
 				<div id="controlPanel" class="col-12"> </div>
 					<div class="cattitle col-12">Data</div>
 						<br/>    
-						<input type="date" id="data" name="data"><br/>
+						<input type="date" id="data" name="data" required><br/>
 					    {% if expenses.errors_data is not empty %}
 	{% for error in expenses.errors_data %}
   <div class="error">{{ error}}</div>
@@ -67,7 +82,7 @@
 
 						<br/>
 						<div class ="cat col-12 ">
-							<input type="number"  placeholder="wpisz kwotę" onfocus="this.placeholder='wpisz kwotę'" onblur="this.placeholder='wpisz kwotę'" name="kwota" min="0.01" step="0.01" id="cash"/>
+							<input type="number"   name="kwota" min="0.01" step="0.01" id="cash" required/>
 							{% if expenses.errors_kwota is not empty %}
 								{% for error in expenses.errors_kwota %}
 									<div class="error">{{ error}}</div>
@@ -99,7 +114,7 @@
 							<input type="radio" name="category" value="{{ dataExpense.name}}" class="expType" checked/>{{ dataExpense.name}}
 						</div> 
 						<div style="clear:both;"></div>
-						<div class="incomeLimitAmount text-danger" id="limit{{ dataExpense.id}}">{% if dataExpense.amount_limit is not empty %}Limit: {{ dataExpense.amount_limit}}{% endif %}</div>
+						<div class="incomeLimitAmount text-danger" id="limit{{ dataExpense.id}}">{% if dataExpense.amount_limit is not empty %}Limit: {{ dataExpense.amount_limit}} zł.{% endif %}</div>
 					</div> </label>
 					{% endfor %}
 				{% endif %}
@@ -115,8 +130,10 @@
 					<input type="submit"  value="Dodaj"/>	
 				</span>
 				<span class ="abort">
-					<input type="submit" value="Anuluj" />		
-				</span>					
+				<a href="/Addexpense/new">
+					<input type="button" value="Anuluj"  href="/addinome/new"/>		
+				</a>
+				</span>						
 			</form>
 		</div>
 	</div>

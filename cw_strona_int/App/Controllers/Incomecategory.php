@@ -18,7 +18,7 @@ class Incomecategory extends \Core\Controller
 	if(Auth::isloggedin())
 		{
 			$incomes = new Incomes();
-	       $dataIncomes= $incomes ->takeIncomesCategoriesAndLimit($_SESSION['user_id']);
+	       $dataIncomes= $incomes ->takeIncomesCategories($_SESSION['user_id']);
 			View::renderTemplate('Incomecategory/new.html',[	
 			'dataIncomes' => $dataIncomes
 			]);
@@ -38,7 +38,7 @@ class Incomecategory extends \Core\Controller
 					
 			$incomes = new Incomes($_POST);
 			$incomes ->insertIncomeCategoryAssignedToUser($_SESSION['user_id']);
-			$dataIncomes= $incomes ->takeIncomesCategoriesAndLimit($_SESSION['user_id']);
+			$dataIncomes= $incomes ->takeIncomesCategories($_SESSION['user_id']);
 			View::renderTemplate('Incomecategory/new.html',[	
 			'dataIncomes' => $dataIncomes
 			]);
@@ -49,26 +49,14 @@ class Incomecategory extends \Core\Controller
 		}
 	}
 	
-	public function saveAction()
-    {
-		$incomes = new Incomes();
-		
-		$incomes ->updateIncomeCategoryAssignedToUserLimit($_SESSION['user_id'], $_POST['salaryLimit'] , $_POST['catName'] );	
-		
-	}
-	
-	public function deleteAction()	
-    {
-		$incomes = new Incomes();		
-		$incomes ->deleteIncomeCategoryAssignedToUserLimit($_SESSION['user_id'], $_POST['catName'] );
-	}
+
 	
 	public function deletecategoryAction()	
     {
 		$incomes = new Incomes();
 		$incomes ->deleteIncomeCategoryAssignedToUser($_SESSION['user_id'], $_POST['limit']);
 		$incomes ->deleteIncomes($_SESSION['user_id'], $_POST['limit']);
-		$dataIncomes= $incomes ->takeIncomesCategoriesAndLimit($_SESSION['user_id']);
+		$dataIncomes= $incomes ->takeIncomesCategories($_SESSION['user_id']);
 		View::renderTemplate('Incomecategory/new.html',[	
 		'dataIncomes' => $dataIncomes
 		]);

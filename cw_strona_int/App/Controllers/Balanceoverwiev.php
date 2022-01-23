@@ -29,13 +29,15 @@ class Balanceoverwiev extends \Core\Controller
 			$sum_expenses=$expenses->takeExpensesSum($_SESSION['user_id'],$data);
  			$below0= $user->below0($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);	 
 			$arg= $expenses->showCharDraft($_SESSION['user_id'], $data);
+			$balanceStatus= $user->balanceStatus($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);
 			View::renderTemplate('Balanceoverwiev/new.html',[	
 			'list_incomes' => $list_incomes,
 			'list_expenses' => $list_expenses,
 			'sum_expenses' => $sum_expenses,
 			'sum_incomes' => $sum_incomes,
 			'below0' => $below0,
-			'arg' => $arg
+			'arg' => $arg,
+			'balanceStatus' => $balanceStatus
 			]);
 		} 
 		else
@@ -62,6 +64,7 @@ class Balanceoverwiev extends \Core\Controller
 				$selectedCurrentYear= $user->currentYearPeriod($_POST['period']);
 				$arg= $expenses->showCharDraft($_SESSION['user_id'], $data);
 				$below0= $user->below0($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);	 
+				$balanceStatus= $user->balanceStatus($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);
 				View::renderTemplate('Balanceoverwiev/new.html',[
 				'list_incomes' => $list_incomes,
 				'list_expenses' => $list_expenses,
@@ -71,7 +74,8 @@ class Balanceoverwiev extends \Core\Controller
 				'selectedPreviousMonth'=>$selectedPreviousMonth,
 				'selectedCurrentYear'=>$selectedCurrentYear,
 				'below0' => $below0,
-				'arg' => $arg
+				'arg' => $arg,
+				'balanceStatus' => $balanceStatus
 				]);
 				
 
@@ -92,7 +96,7 @@ class Balanceoverwiev extends \Core\Controller
 				$selectedUsusualPeriod= $user->unusualPeriod($_POST['period']);
 				$arg= $expenses->showCharDraftUnusual($_SESSION['user_id'], $_POST['datapocz'],$_POST['datakonc']);
 				$below0= $user->below0($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);
-			
+				$balanceStatus= $user->balanceStatus($sum_incomes [0] ['SUM(incomes.Amount)'] , $sum_expenses [0] ['SUM(expenses.Amount)']);
 				View::renderTemplate('Balanceoverwiev/new.html',[
 				'list_incomes' => $list_incomes,
 				'list_expenses' => $list_expenses,
@@ -105,7 +109,8 @@ class Balanceoverwiev extends \Core\Controller
 				'below0' => $below0,
 				'arg' => $arg,
 				'datapocz' =>$_POST['datapocz'],
-				'datakonc' =>$_POST['datakonc']
+				'datakonc' =>$_POST['datakonc'],
+				'balanceStatus' => $balanceStatus
 				]);
 
 
