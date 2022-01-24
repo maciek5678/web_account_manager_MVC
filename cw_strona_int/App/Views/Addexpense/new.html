@@ -15,6 +15,10 @@
 		var type=$(".expType:checked").val();
 		var date=$("#data").val();
 		var id=$("#data").val();
+		
+		if(money===""){
+		money=0;
+		}
 		{% if dataExpenses is not empty %}
 			{% for dataExpense in dataExpenses %}
 				if (type=="{{ dataExpense.name}}" )
